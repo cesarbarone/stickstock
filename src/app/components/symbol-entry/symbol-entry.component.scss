@@ -1,0 +1,32 @@
+ion-card-content {
+  display: flex;
+
+  div:first-child {
+    border-right: solid 1px var(--ion-color-medium)
+  }
+  div:last-child {
+    border-left: solid 1px var(--ion-color-medium)
+  }
+}
+
+.positive {
+  color: var(--ion-color-success)
+}
+
+.negative {
+  color: var(--ion-color-danger)
+}
+
+.stats-container {
+  flex: 1;
+  text-align: center;
+}
+
+.stats-title {
+  padding-bottom: 5px;
+}
+// .stats-container {
+//   div:first-child {
+//     display: block;
+//   }
+// }
