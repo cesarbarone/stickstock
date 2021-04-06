@@ -6,6 +6,7 @@ import { StockService } from './stock.service';
 import { MarketStackService } from './market-stack.service';
 import { environment } from 'src/environments/environment';
 import { Stock } from '../models/stock';
+import { skip } from 'rxjs/operators';
 
 describe('Stockservice', () => {
   let service: StockService;
@@ -23,6 +24,48 @@ describe('Stockservice', () => {
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+  });
+
+  describe('.refresh', () => {
+    const url = 'http://fake.marketstack.com&symbol=AAPL';
+    const apiStockResponse = { id: '1', url: url };
+    const stock = new Stock(url, '1', 'AAPL', 100, 90);
+    const marketStackResponse = { "pagination": { "limit": 1, "offset": 0, "count": 1, "total": 5162 }, "data": [{ "open": 122.15, "high": 122.15, "low": 122.15, "last": null, "close": null, "volume": null, "date": "2021-04-02T00:00:00+0000", "symbol": "AAPL", "exchange": "IEXG" }] }
+    const marketStackResponse2 = { "pagination": { "limit": 1, "offset": 0, "count": 1, "total": 5162 }, "data": [{ "open": 1, "high": 122.15, "low": 122.15, "last": 1, "close": null, "volume": null, "date": "2021-04-02T00:00:00+0000", "symbol": "AAPL", "exchange": "IEXG" }] }
+
+    beforeEach(() => {
+      service.add(url).subscribe();
+      const apiReq = httpTestingController.expectOne(`${environment.apiUrl}/${StockService.ENDPOINT}`);
+      const marketStackReq = httpTestingController.expectOne(url);
+      marketStackReq.flush(marketStackResponse);
+      apiReq.flush(apiStockResponse);
+    });
+
+  
+    it('should get from marketstack', () => {
+      service.refresh(stock).subscribe();
+      const marketStack = httpTestingController.expectOne(url);
+      expect(marketStack.request.method).toEqual('GET')
+      marketStack.flush(marketStackResponse);
+    });
+
+    it('should emit new stocks with refreshed stock', done => {
+      service.stocks$
+        .pipe(skip(1))
+        .subscribe((stocks) => {
+          expect(stocks[0].open).toEqual(1);
+          expect(stocks[0].last).toEqual(1);
+          done();
+        });
+      service.refresh(stock).subscribe();
+      const marketStack = httpTestingController.expectOne(url);
+      marketStack.flush(marketStackResponse2);
+    });
+
+    afterEach(() => {
+      httpTestingController.verify();
+    });
+  
   });
 
   describe('.add', () => {

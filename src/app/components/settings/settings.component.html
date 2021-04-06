@@ -7,18 +7,27 @@
   <ion-list>
     <ion-item>
       <ion-label position="stacked">Change Percentage Threshold</ion-label>
-      <ion-input formControlName="percentageThreshold" [required]="true" placeholder="Type here"></ion-input>
+      <ion-input formControlName="percentageThreshold"
+                 [required]="true"
+                 placeholder="Type here"
+                 type="number"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">High Frequency Polling Interval</ion-label>
-      <ion-input formControlName="highInterval" [required]="true" placeholder="Type here"></ion-input>
+      <ion-input formControlName="highInterval"
+                 [required]="true"
+                 placeholder="Type here"
+                 type="number"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Low Frequency Polling Interval</ion-label>
-      <ion-input formControlName="lowInterval" [required]="true" placeholder="Type here"></ion-input>
+      <ion-input formControlName="lowInterval"
+                 [required]="true"
+                 placeholder="Type here"
+                 type="number"></ion-input>
     </ion-item>
   </ion-list>
-  <ion-button expand="block" fill="clear">
+  <ion-button expand="block" fill="clear" type="submit" [disabled]="settingsForm.invalid">
     Apply
   </ion-button>
 </form>

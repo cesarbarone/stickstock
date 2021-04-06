@@ -7,6 +7,8 @@ export class Stock {
   private _change?: number;
   public open: number;
   public last: number;
+  
+  public intervalType: string = 'low';
 
   constructor(url: string, id: string, symbol: string, open: number, last: number) {
     this._id = id;
@@ -20,6 +22,10 @@ export class Stock {
 
   set url(url: string) {
     this._url = url;
+  }
+
+  set lastPull(number) {
+    this._lastPull = number;
   }
 
   get id() {
@@ -36,6 +42,10 @@ export class Stock {
 
   get change() {
     return this._change;
+  }
+
+  get url() {
+    return this._url;
   }
 
   calculateChange() {

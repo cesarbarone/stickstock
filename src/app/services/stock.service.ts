@@ -49,8 +49,14 @@ export class StockService {
     return this.http.get<Stock[]>(`${environment.apiUrl}/${StockService.ENDPOINT}`);
   }
 
-  del(): Observable<any> {
-    return this.http.delete(`${environment.apiUrl}/${StockService.ENDPOINT}/1223`)
+  refresh(stock: Stock): Observable<any> {
+    return this.marketStackService.get(stock.url)
+      .pipe(
+        map((marketStackStock) => {
+          this.updateStock(stock, marketStackStock);
+          this.emitStocks();
+        })
+      )   
   }
 
   bootStore(): void {
@@ -70,6 +76,16 @@ export class StockService {
         this.emitStocks();
         subscription.unsubscribe();
       })
+  }
+
+  private updateStock(stock: Stock, marketStackStock: MarketStackStock) {
+    let stockToBeUpdated = this._stocks.find((oldStock) => {
+      return oldStock.id == stock.id
+    });
+    stockToBeUpdated.open = marketStackStock.open;
+    stockToBeUpdated.last = marketStackStock.last;
+    stockToBeUpdated.calculateChange();
+    stockToBeUpdated.lastPull = Date.now();
   }
 
   private parseMarketStackToStock(marketStackToStock: MarketStackStock, jsonStock: Stock): Stock {

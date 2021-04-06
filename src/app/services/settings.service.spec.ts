@@ -1,12 +1,12 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { environment } from 'src/environments/environment';
-import { AppSettings } from '../models/app-settings';
+import { Settings } from '../models/settings';
 
-import { AppSettingsService } from './app-settings.service';
+import { SettingsService } from './settings.service';
 
-describe('AppSettingsService', () => {
-  let service: AppSettingsService;
+describe('SettingsService', () => {
+  let service: SettingsService;
   let httpTestingController: HttpTestingController;
 
   beforeEach(() => {
@@ -15,7 +15,7 @@ describe('AppSettingsService', () => {
         HttpClientTestingModule
       ]
     });
-    service = TestBed.inject(AppSettingsService);
+    service = TestBed.inject(SettingsService);
     httpTestingController = TestBed.inject(HttpTestingController);
   });
 
@@ -25,14 +25,26 @@ describe('AppSettingsService', () => {
 
   describe('.update', () => {
 
-    const settingsUrl = `${environment.apiUrl}/${AppSettingsService.ENDPOINT}`;
-    const newSettings: AppSettings = { percentageThreshold: 1, highInterval: 1, lowInterval: 1 };
+    const settingsUrl = `${environment.apiUrl}/${SettingsService.ENDPOINT}`;
+    const newSettings: Settings = { percentageThreshold: 1, highInterval: 1, lowInterval: 1 } as Settings;
   
     it('should PUT to api', () => {
       service.update(newSettings).subscribe();
-      const req = httpTestingController.expectOne(`${environment.apiUrl}/${AppSettingsService.ENDPOINT}`);
+      const req = httpTestingController.expectOne(`${environment.apiUrl}/${SettingsService.ENDPOINT}`);
       expect(req.request.method).toEqual('PUT');
       expect(req.request.body).toEqual(newSettings);
+      req.flush({});
+    });
+
+    it('should emit new settings', done => {
+      service.settings$.subscribe((newSettings) => {
+        expect(newSettings.percentageThreshold).toEqual(1);
+        expect(newSettings.highInterval).toEqual(1);
+        expect(newSettings.lowInterval).toEqual(1);
+        done();
+      });
+      service.update(newSettings).subscribe();
+      const req = httpTestingController.expectOne(`${environment.apiUrl}/${SettingsService.ENDPOINT}`);
       req.flush({});
     });
   
@@ -40,12 +52,12 @@ describe('AppSettingsService', () => {
 
   describe('.bootStore', () => {
 
-    const settingsUrl = `${environment.apiUrl}/${AppSettingsService.ENDPOINT}`;
+    const settingsUrl = `${environment.apiUrl}/${SettingsService.ENDPOINT}`;
     const apiResponse = { percentageThreshold: 3, highInterval: 2, lowInterval: 15 };
     
     it('should request settings from api', () => {
       service.bootStore();
-      const req = httpTestingController.expectOne(`${environment.apiUrl}/${AppSettingsService.ENDPOINT}`);
+      const req = httpTestingController.expectOne(`${environment.apiUrl}/${SettingsService.ENDPOINT}`);
       expect(req.request.method).toEqual('GET');
       req.flush(apiResponse);
     });
@@ -59,7 +71,7 @@ describe('AppSettingsService', () => {
           done()
         })
       service.bootStore();
-      const req = httpTestingController.expectOne(`${environment.apiUrl}/${AppSettingsService.ENDPOINT}`);
+      const req = httpTestingController.expectOne(`${environment.apiUrl}/${SettingsService.ENDPOINT}`);
       req.flush(apiResponse);
     });
     

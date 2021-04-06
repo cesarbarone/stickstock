@@ -6,7 +6,16 @@
       </ion-card-subtitle>
       <app-stock-delete [stock]="stock"></app-stock-delete>
     </div>
-    <ion-card-title>{{ stock.symbol}}</ion-card-title>
+    <ion-card-title>
+      <div class="title-container">
+        <div>
+          {{ stock.symbol}}
+        </div>
+        <div>
+          <ion-badge [color]="stock.intervalType == 'high' ? 'primary' : 'warning'" >{{stock.intervalType}}</ion-badge>
+        </div>
+      </div>
+    </ion-card-title>
   </ion-card-header>
 
   <ion-card-content>

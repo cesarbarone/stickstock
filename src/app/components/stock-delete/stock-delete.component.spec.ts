@@ -1,6 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
+import { Observable, of } from 'rxjs';
 import { Stock } from 'src/app/models/stock';
 import { StockService } from 'src/app/services/stock.service';
 
@@ -36,11 +37,10 @@ describe('StockDeleteComponent', () => {
       component.stock = stock;
     });
     
-    xit('should call StockService.delete', () => {
-      spyOn(stockService, 'delete')
+    it('should call StockService.delete', () => {
+      spyOn(stockService, 'delete').and.returnValue(of())
       component.delete();
       expect(stockService.delete).toHaveBeenCalledOnceWith(stock);
     });
-    
   });
 });

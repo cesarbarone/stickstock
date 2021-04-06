@@ -1,8 +1,8 @@
-import { AppSettings } from "./app-settings";
+import { Settings } from "./settings";
 
-describe('AppSettings', () => {
+describe('Settings', () => {
 
-  let settings = new AppSettings();
+  let settings = new Settings();
 
   beforeEach(() => {
     settings.percentageThreshold = 3;
@@ -16,17 +16,15 @@ describe('AppSettings', () => {
       percentageThreshold: 1,
       highInterval: 1,
       lowInterval: 1,
-    } as AppSettings;
+    } as Settings;
   
     it('should update', () => {
       settings.update(newSettings);
       expect(settings.percentageThreshold).toBe(1);
+      expect(settings.highInterval).toBe(1);
+      expect(settings.lowInterval).toBe(1);
     });
   
-  });
-
-  it('', () => {
-
   });
 
 });

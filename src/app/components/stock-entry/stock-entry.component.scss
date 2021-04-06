@@ -9,6 +9,11 @@ ion-card-content {
   }
 }
 
+.title-container {
+  display: flex;
+  justify-content: space-between;
+}
+
 .positive {
   color: var(--ion-color-success)
 }
