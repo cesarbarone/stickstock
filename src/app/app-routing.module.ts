@@ -1,20 +1,17 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { SymbolsListComponent } from './components/symbols-list/symbols-list.component';
-import { SymbolsUrlsResolver } from './resolvers/symbols-urls.resolver';
+import { StocksListComponent } from './components/stocks-list/stocks-list.component';
+// import { StocksUrlsResolver } from './resolvers/stocks-urls.resolver';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'symbols',
+    redirectTo: 'stocks',
     pathMatch: 'full'
   },
   {
-    path: 'symbols',
-    component: SymbolsListComponent,
-    resolve: {
-      symbolsUrls: SymbolsUrlsResolver
-    }
+    path: 'stocks',
+    component: StocksListComponent,
   },
 ];
 

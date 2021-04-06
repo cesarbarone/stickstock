@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { SymbolEntryComponent } from './symbol-entry.component';
+import { SettingsComponent } from './settings.component';
 
-describe('SymbolEntryComponent', () => {
-  let component: SymbolEntryComponent;
-  let fixture: ComponentFixture<SymbolEntryComponent>;
+describe('SettingsComponent', () => {
+  let component: SettingsComponent;
+  let fixture: ComponentFixture<SettingsComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SymbolEntryComponent ],
+      declarations: [ SettingsComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SymbolEntryComponent);
+    fixture = TestBed.createComponent(SettingsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

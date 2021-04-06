@@ -10,7 +10,7 @@ export class MarketStackService {
 
   constructor(private http: HttpClient) { }
 
-  get(url: string): Observable<MarketStackSymbol> {
+  get(url: string): Observable<MarketStackStock> {
     return this.http.get<MarketStackResponse>(url)
       .pipe(
         map((marketStackResponse: MarketStackResponse) => marketStackResponse.data[0] )
@@ -19,10 +19,10 @@ export class MarketStackService {
 }
 
 export interface MarketStackResponse {
-  data: MarketStackSymbol[];
+  data: MarketStackStock[];
 }
 
-export interface MarketStackSymbol {
+export interface MarketStackStock {
   url: string;
   symbol: string;
   open: number;

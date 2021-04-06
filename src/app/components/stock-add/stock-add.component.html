@@ -1,0 +1,21 @@
+<div>
+  <form #urlForm="ngForm" (ngSubmit)="urlForm.form.valid && addStock()" novalidate>
+    <ion-input 
+      placeholder="Add a new stock by url"
+      [color]="medium"
+      type="'url'"
+      ngClass="{'invalid': urlForm.submitted && urlInput.invalid}"
+      name="urlInput"
+      [pattern]="'(https?://).*'"
+      inputmode="url"
+      [clearInput]="true"
+      [enterkeyhint]="'Enter'"
+      [(ngModel)]="stockUrl"
+      #urlInput="ngModel"
+      required
+      ></ion-input>
+      <ion-label color="danger" *ngIf="urlForm.submitted && urlInput.invalid">
+        invalid URL
+      </ion-label>
+  </form>
+</div>

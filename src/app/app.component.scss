@@ -12,6 +12,14 @@
   }
 }
 
+.title-container {
+  display: inline-flex;
+}
+
+.menu-toolbar {
+  --border-style: none;
+}
+
 // ion-menu ion-content {
 //   --background: var(--ion-item-background, var(--ion-background-color, #fff));
 // }

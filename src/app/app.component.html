@@ -1,12 +1,44 @@
 <ion-app>
-  <ion-header [translucent]="true">
+  <ion-menu side="start" content-id="main-content">
+    <app-settings></app-settings>
+  </ion-menu>
+  
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <div class="toolbar-container">
+          <div class="title-container">
+            <ion-buttons slot="start">
+              <ion-menu-button>
+                <ion-icon name="cog-outline"></ion-icon>
+              </ion-menu-button>
+            </ion-buttons>
+            <ion-title>TikStock</ion-title>
+          </div>
+          <div>
+            <app-stock-add></app-stock-add> 
+          </div>
+        </div>
+      </ion-toolbar>
+      <!-- <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Inbox</ion-title>
+      </ion-toolbar> -->
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-router-outlet></ion-router-outlet>
+    </ion-content>
+  </div>
+  <!-- <ion-header [translucent]="true">
     <ion-toolbar>
       <div class="toolbar-container"> 
         <div>
           <ion-title>TikStock</ion-title>
         </div>
         <div>
-          <app-symbol-add></app-symbol-add> 
+          <app-stock-add></app-stock-add> 
         </div>
       </div>
     </ion-toolbar>
@@ -14,5 +46,5 @@
 
   <ion-content class="">
     <ion-router-outlet></ion-router-outlet>
-  </ion-content>
+  </ion-content> -->
 </ion-app>

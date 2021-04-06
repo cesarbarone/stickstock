@@ -1,0 +1,35 @@
+<ion-card>
+  <ion-card-header>
+    <div class="subtitle-container">
+      <ion-card-subtitle>
+        Last pull: {{ stock.lastPull  | date:'mediumTime'}}
+      </ion-card-subtitle>
+      <app-stock-delete [stock]="stock"></app-stock-delete>
+    </div>
+    <ion-card-title>{{ stock.symbol}}</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <div class="stats-container">
+      <h2 class="stats-title">Open</h2>
+      <h2 class="stats-value">{{ stock.open | currency }}</h2>
+    </div>
+    <div class="stats-container">
+      <h2 class="stats-title">Last</h2>
+      <h2 class="stats-value">{{ stock.last | currency }}</h2>
+    </div>
+    <div class="stats-container">
+      <h2 class="stats-title">Change</h2>
+      <h2 class="stats-value" [ngClass]="{'negative': stock.change < 0, 'positive': stock.change > 0}">{{ stock.change | number:'1.2-2' }}%</h2>
+    </div>
+    
+  </ion-card-content>
+</ion-card>
+
+<ng-template #loading>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Loading...</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+</ng-template>
