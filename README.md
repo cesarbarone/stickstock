@@ -33,7 +33,7 @@
 
 ## > How to run the tests
 ### Step 1: Run the container 
-```docker run -it -p 8100:8100 -p 4567:4567  stickstock```
+```docker run -it -p 8100:8100 -p 4567:4567  cesarbarone/stickstock```
 ### Step 2: Get the container id from column CONTAINER_ID
 ```docker ps```
 ### Step 3: Running frontend tests
