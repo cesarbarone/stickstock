@@ -9,7 +9,7 @@ import { StockService } from 'src/app/services/stock.service';
 })
 export class StockAddComponent implements OnInit {
 
-  public stockUrl: string = 'http://localhost:4567/marketstack/AAPL';
+  public stockUrl: string = 'http://127.0.0.1:4567/marketstack/AAPL';
 
   constructor(private stockService: StockService) { }
 
