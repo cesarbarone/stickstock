@@ -4,7 +4,6 @@ require 'sinatra'
 class StocksController < Sinatra::Base
 
   register Sinatra::Cors
-
   set :allow_origin, "*"
   set :allow_methods, "GET,HEAD,POST,DELETE,PUT"
   set :allow_headers, "content-type,if-modified-since"
