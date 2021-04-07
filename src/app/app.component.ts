@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController } from '@ionic/angular';
 import { PollingService } from './services/polling.service';
 
 
@@ -21,7 +20,7 @@ export class AppComponent implements OnInit{
   
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   
-  constructor(private menuController: MenuController, private pollingService: PollingService) {}
+  constructor(private pollingService: PollingService) {}
   
   ngOnInit(): void {
     this.pollingService.boot();
